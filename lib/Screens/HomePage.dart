@@ -119,16 +119,16 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Row(
-                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: SizedBox(
                           height: 40,
+                          width: 50,
                           child: Image.asset("assets/buddylogo.png")),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 5),
+                    const SizedBox(
+                      width: 250,
                       child: Text(
                         "Buddy's Mart",
                         style: TextStyle(
@@ -137,13 +137,10 @@ class _HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.w500),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 140),
-                      child: Icon(
-                        Icons.notifications_none,
-                        color: Colors.black,
-                        size: 29,
-                      ),
+                    const Icon(
+                      Icons.notifications_none,
+                      color: Colors.black,
+                      size: 29,
                     ),
                   ],
                 ),
@@ -158,172 +155,179 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   child: Row(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Text("Categories",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold)),
+                      const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text("Categories",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold)),
+                        ),
+                        flex: 2,
                       ),
-                      const SizedBox(
-                        width: 210,
+                      FlatButton(
+                        onPressed: () {},
+                        child: const Text('All',
+                            style: TextStyle(color: Colors.red)),
+                        textColor: Colors.white,
                       ),
-                      SizedBox(
-                          height: 30,
-                          width: 50,
-                          child: FlatButton(
-                            onPressed: () {},
-                            child: const Text('All',
-                                style: TextStyle(color: Colors.red)),
-                            textColor: Colors.white,
-                          )),
                     ],
                   ),
                 ),
-                Row(
-                  children: [
-                    for (Category category in categoryList)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 5),
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  InkWell(
-                                    onTap: (){},
-                                    child: Container(
-                                      height: 60,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                        color: category.bgColor,
-                                        shape: BoxShape.circle,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    children: [
+                      for (Category category in categoryList)
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 9),
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        height: 60,
+                                        width: 60,
+                                        decoration: BoxDecoration(
+                                          color: category.bgColor,
+                                          shape: BoxShape.circle,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Positioned(
-                                    top: 10,
-                                    left: 10,
-                                    child: Container(
-                                      height: 40,
-                                      width: 40,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: AssetImage(
-                                                  category.imageUrl))),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                category.name,
-                                textScaleFactor: 1.0,
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    for (Category category in categoryLists)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5, top: 5),
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Container(
-                                      height: 60,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                        color: category.bgColor,
-                                        shape: BoxShape.circle,
+                                    Positioned(
+                                      top: 10,
+                                      left: 10,
+                                      child: Container(
+                                        height: 40,
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                    category.imageUrl))),
                                       ),
                                     ),
-                                  ),
-                                  Positioned(
-                                    top: 7,
-                                    right: 10,
-                                    child: Container(
-                                      height: 40,
-                                      width: 40,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: AssetImage(
-                                                  category.imageUrl))),
-                                    ),
-                                  ),
-                                  category.comingSoon != ""
-                                      ? Positioned(
-                                          top: 45,
-                                          right: 4,
-                                          child: Container(
-                                            height: 15,
-                                            width: 54,
-                                            decoration: const BoxDecoration(
-                                                color: Colors.red,
-                                                borderRadius: BorderRadius
-                                                        .all(
-                                                    Radius.circular(10))),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 3, left: 2),
-                                              child: Text(
-                                                category.comingSoon,
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      : Container(),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                category.name,
-                                textScaleFactor: 1.0,
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              )
-                            ],
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  category.name,
+                                  textScaleFactor: 1.0,
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.5),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                  ],
+                          flex: 4,
+                        )
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 SizedBox(
-                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    children: [
+                      for (Category category in categoryLists)
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 9),
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        height: 60,
+                                        width: 60,
+                                        decoration: BoxDecoration(
+                                          color: category.bgColor,
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 7,
+                                      left: 2,
+                                      child: Container(
+                                        height: 40,
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                    category.imageUrl))),
+                                      ),
+                                    ),
+                                    category.comingSoon != ""
+                                        ? Positioned(
+                                            top: 45,
+                                            right: 4,
+                                            child: Container(
+                                              height: 15,
+                                              width: 55,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10))),
+                                              child: SizedBox(
+                                                width: 120,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Text(
+                                                    category.comingSoon,
+                                                    style: const TextStyle(
+                                                      fontSize: 8,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Container(),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  category.name,
+                                  textScaleFactor: 1.0,
+                                  style: const TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.5),
+                                )
+                              ],
+                            ),
+                          ),
+                          flex: 4,
+                        )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 250,
                   width: 340,
                   child: Stack(
                     children: [
@@ -339,8 +343,8 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                       ),
                       Positioned(
-                        top: 110,
-                        left: 220,
+                        top: 130,
+                        left: 250,
                         child: Container(
                           height: 90,
                           width: 90,
@@ -375,12 +379,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 SizedBox(
-                  height: 200,
+                  height: 350,
                   child: todaysdeallist.isNotEmpty
                       ? ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
                           itemCount: todaysdeallist.length,
                           itemBuilder: (BuildContext context, int index) {
                             return SizedBox(
